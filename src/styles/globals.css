@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-grayscale-950 text-accent-100;
+  }
+
+  /* HIDE arrow in input type number */
+  .arrow-hide::-webkit-inner-spin-button,
+  .arrow-hide::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .arrow-hide {
+    -moz-appearance: textfield;
+  }
+}

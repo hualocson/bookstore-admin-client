@@ -11,6 +11,7 @@ import {
   HomeIcon as dashboardIconSolid,
   DocumentTextIcon as ordersIconSolid,
 } from "@heroicons/react/24/solid";
+import AdminProvider from "./AdminProvider";
 
 const navigation = [
   {
@@ -38,12 +39,12 @@ const navigation = [
 
 const MainLayout = ({ children }) => {
   return (
-    <div>
+    <AdminProvider>
       <SideBar navigation={navigation} />
       <main className="py-10 lg:pl-72">
         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
       </main>
-    </div>
+    </AdminProvider>
   );
 };
 

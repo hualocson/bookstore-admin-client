@@ -1,5 +1,7 @@
+import LoginForm from "@/components/auth/LoginForm";
+
 const Home = (props) => {
-  return <div>Index</div>;
+  return <LoginForm />;
 };
 
 export default Home;

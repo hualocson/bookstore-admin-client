@@ -2,14 +2,25 @@ import { cn } from "@/utils/common-functions";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Button from "../ui/Button";
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
+import { authApi } from "@/apis";
 const SideBar = ({ navigation }) => {
   const [selected, setSelected] = useState(1);
-  const { pathname } = useRouter();
+  const router = useRouter();
   useEffect(() => {
     navigation.forEach((item) => {
-      if (pathname.includes(item.href)) setSelected(item.id);
+      if (router.pathname.includes(item.href)) setSelected(item.id);
     });
-  }, [pathname, navigation]);
+  }, [router.pathname, navigation]);
+
+  const onLogOut = async () => {
+    const { error } = await authApi.logout();
+
+    if (error !== undefined) {
+      router.replace("/");
+    }
+  };
   return (
     <>
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
@@ -48,7 +59,7 @@ const SideBar = ({ navigation }) => {
                   ))}
                 </ul>
               </li>
-              <li className="mt-auto">
+              <li className="mt-auto flex items-center justify-between">
                 <Link
                   href="#"
                   className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-grayscale-200 hover:text-grayscale-100 hover:bg-grayscale-500"
@@ -61,6 +72,19 @@ const SideBar = ({ navigation }) => {
                   <span className="sr-only">Your profile</span>
                   <span aria-hidden="true">Tom Cook</span>
                 </Link>
+
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  customClass="border-danger-500 text-danger-500 hover:bg-danger-600 hover:text-grayscale-100"
+                  icon={
+                    <ArrowRightOnRectangleIcon
+                      className="h-4 w-4"
+                      aria-hidden="true"
+                    />
+                  }
+                  onClick={onLogOut}
+                />
               </li>
             </ul>
           </nav>

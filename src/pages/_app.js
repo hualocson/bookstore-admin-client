@@ -1,11 +1,12 @@
 import "@/styles/globals.css";
-import MainLayout from "@/components/layouts/layout";
+import CustomToastContainer from "@/components/ui/CustomToastContainer";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <MainLayout>
+    <>
       <Component {...pageProps} />
-    </MainLayout>
+      <CustomToastContainer />
+    </>
   );
 }
 

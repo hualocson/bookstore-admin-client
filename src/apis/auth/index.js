@@ -10,6 +10,7 @@ const authApi = {
 
       return {
         error: undefined,
+        user: response.payload,
       };
     } catch (error) {
       return {

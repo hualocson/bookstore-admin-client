@@ -17,3 +17,9 @@
     -moz-appearance: textfield;
   }
 }
+
+@layer components {
+  .tab-heading {
+    @apply text-2xl font-bold text-primary-300;
+  }
+}

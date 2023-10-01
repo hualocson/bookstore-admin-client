@@ -1,5 +1,7 @@
+import MainLayout from "@/components/layouts/Layout";
+
 const ProductsPage = (props) => {
-  return <div>ProductsPage</div>;
+  return <MainLayout>ProductsPage</MainLayout>;
 };
 
 export default ProductsPage;

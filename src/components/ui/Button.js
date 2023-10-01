@@ -1,6 +1,7 @@
 import { cn } from "@/utils/common-functions";
 import Link from "next/link";
 import React from "react";
+import { Slot } from "@radix-ui/react-slot";
 
 const Button = React.forwardRef(
   /**
@@ -16,6 +17,7 @@ const Button = React.forwardRef(
    * @param {string} props.customClass
    * @param {"primary" | "secondary" | "danger" | "success" | "grayscale"} props.variant
    * @param {"sm" | "md" | "lg"} props.size
+   * @param {boolean} props.asChild
    * @param {string} props.link
    * @param {() => void} props.onClick
    * @param {any[]} props.props
@@ -32,6 +34,7 @@ const Button = React.forwardRef(
       variant,
       size,
       link,
+      asChild = false,
       onClick,
       ...props
     },
@@ -39,7 +42,7 @@ const Button = React.forwardRef(
   ) => {
     const className = cn({
       "inline-flex gap-2 items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none duration-300 transition-all": true,
-      "bg-primary-300 hover:bg-primary-400 text-grayscale-900":
+      "bg-primary-300 hover:bg-primary-400 text-grayscale-900 hover:text-grayscale-950":
         variant === "primary",
       "bg-transparent text-primary-500 border-primary-500 hover:bg-primary-500 hover:text-grayscale-800":
         variant === "secondary",
@@ -67,6 +70,7 @@ const Button = React.forwardRef(
       "h-6 w-6": size === "lg",
     });
 
+    const Comp = asChild ? Slot : "button";
     return link ? (
       <Link href={link} className={className} {...props} ref={forwardRef}>
         {loading ? (
@@ -96,7 +100,7 @@ const Button = React.forwardRef(
         {children}
       </Link>
     ) : (
-      <button
+      <Comp
         ref={forwardRef}
         className={className}
         onClick={onClick}
@@ -125,10 +129,12 @@ const Button = React.forwardRef(
             ></path>
           </svg>
         ) : (
-          icon
+          <>
+            {icon}
+            {children}
+          </>
         )}
-        {children}
-      </button>
+      </Comp>
     );
   }
 );

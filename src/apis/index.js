@@ -1,3 +1,4 @@
 import authApi from "./auth";
+import assetsApi from "./assetsApi";
 
-export { authApi };
+export { authApi, assetsApi };

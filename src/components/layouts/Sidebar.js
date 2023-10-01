@@ -69,9 +69,10 @@ const SideBar = ({ navigation }) => {
                   <Image
                     src={"/books-logo.svg"}
                     alt="Logo"
-                    objectFit="cover"
                     width={36}
                     height={36}
+                    className="object-contain"
+                    priority
                   />
                   <span>{user?.username ?? "Not user"}</span>
                 </div>
@@ -132,7 +133,7 @@ const SideBar = ({ navigation }) => {
                 <Button
                   variant="grayscale"
                   size="sm"
-                  customClass="flex gap-x-3 rounded-md bg-semi-grayscale-700 leading-6 font-semibold w-full text-danger-400"
+                  customClass="flex gap-x-3 rounded-md bg-semi-grayscale-800 leading-6 font-semibold w-full text-danger-400 hover:text-danger-500 hover:bg-semi-grayscale-700"
                   icon={
                     <ArrowRightOnRectangleIcon
                       className="h-4 w-4"

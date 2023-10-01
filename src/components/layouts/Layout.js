@@ -50,7 +50,7 @@ const MainLayout = ({ children }) => {
   return (
     <AdminProvider>
       <SideBar navigation={navigation} />
-      <main className="py-10 lg:pl-44">
+      <main className="py-10 pl-44">
         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
       </main>
     </AdminProvider>

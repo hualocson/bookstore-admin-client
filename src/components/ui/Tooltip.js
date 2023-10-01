@@ -5,7 +5,6 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 const TooltipProvider = TooltipPrimitive.Provider;
 
 const RadixTooltip = TooltipPrimitive.Root;
-const TooltipArrow = TooltipPrimitive.Arrow;
 
 const TooltipTrigger = TooltipPrimitive.Trigger;
 

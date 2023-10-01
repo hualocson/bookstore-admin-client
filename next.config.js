@@ -2,6 +2,14 @@
 const nextConfig = {
   reactStrictMode: false,
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

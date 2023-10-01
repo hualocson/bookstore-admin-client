@@ -1,5 +1,7 @@
+import MainLayout from "@/components/layouts/Layout";
+
 const OrdersPage = (props) => {
-  return <div>OrdersPage</div>;
+  return <MainLayout>OrdersPage</MainLayout>;
 };
 
 export default OrdersPage;

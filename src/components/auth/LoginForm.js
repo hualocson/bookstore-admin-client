@@ -38,7 +38,7 @@ const LoginForm = () => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen max-w-lg mx-auto gap-y-4">
-      <h1 className="text-xl font-bold text-primary-500">Login here</h1>
+      <h1 className="text-xl font-bold text-primary-300">Login here</h1>
       <div className="flex flex-col gap-y-2 w-full">
         <InputField
           type="text"

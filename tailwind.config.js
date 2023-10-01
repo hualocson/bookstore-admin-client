@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   darkMode: true,
   content: [
@@ -10,17 +12,17 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          50: "#fffeea",
-          100: "#fff9c5",
-          200: "#fff485",
-          300: "#ffe846",
-          400: "#ffd81b",
-          500: "#ffb800",
-          600: "#e28d00",
-          700: "#bb6302",
-          800: "#984c08",
-          900: "#7c3f0b",
-          950: "#482000",
+          50: "#fef6ee",
+          100: "#feead6",
+          200: "#fbd1ad",
+          300: "#f9b17a",
+          400: "#f58542",
+          500: "#f2631d",
+          600: "#e34a13",
+          700: "#bd3611",
+          800: "#962c16",
+          900: "#792715",
+          950: "#411109",
         },
         accent: {
           50: "#f8f8f8",
@@ -62,18 +64,35 @@ module.exports = {
           950: "#470f08",
         },
         grayscale: {
-          50: "#f7f8f8",
-          100: "#edeef1",
-          200: "#d7dbe0",
-          300: "#b5bbc4",
-          400: "#8c97a4",
-          500: "#6e7a89",
-          600: "#586171",
-          700: "#48505c",
-          800: "#3e444e",
-          900: "#373c43",
-          950: "#292c32",
+          50: "#f3f6fb",
+          100: "#e4eaf5",
+          200: "#cfdaee",
+          300: "#aec2e2",
+          400: "#87a2d3",
+          500: "#6b85c6",
+          600: "#576eb9",
+          700: "#4d5da8",
+          800: "#434e8a",
+          900: "#39426f",
+          950: "#2d3250",
         },
+        "semi-grayscale": {
+          50: "#f4f6fa",
+          100: "#e6eaf3",
+          200: "#d3daea",
+          300: "#b5c2db",
+          400: "#92a3c8",
+          500: "#7788ba",
+          600: "#6572ab",
+          700: "#59629c",
+          800: "#4d5280",
+          900: "#424769",
+          950: "#2b2d40",
+        },
+      },
+      fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

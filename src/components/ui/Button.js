@@ -39,7 +39,7 @@ const Button = React.forwardRef(
   ) => {
     const className = cn({
       "inline-flex gap-2 items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none duration-300 transition-all": true,
-      "bg-primary-500 hover:bg-primary-400 text-grayscale-800":
+      "bg-primary-300 hover:bg-primary-400 text-grayscale-900":
         variant === "primary",
       "bg-transparent text-primary-500 border-primary-500 hover:bg-primary-500 hover:text-grayscale-800":
         variant === "secondary",

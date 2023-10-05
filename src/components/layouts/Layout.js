@@ -5,6 +5,7 @@ import {
   HomeIcon as dashboardIconOutLine,
   DocumentTextIcon as ordersIconOutLine,
   FolderIcon as assetsIconOutLine,
+  TagIcon as categoriesIconOutLine,
 } from "@heroicons/react/24/outline";
 
 import {
@@ -12,6 +13,7 @@ import {
   HomeIcon as dashboardIconSolid,
   DocumentTextIcon as ordersIconSolid,
   FolderIcon as assetsIconSolid,
+  TagIcon as categoriesIconSolid,
 } from "@heroicons/react/24/solid";
 import AdminProvider from "./AdminProvider";
 
@@ -31,18 +33,25 @@ const navigation = [
     id: 2,
   },
   {
+    name: "Categories",
+    href: "/categories",
+    solidIcon: categoriesIconSolid,
+    outlineIcon: categoriesIconOutLine,
+    id: 3,
+  },
+  {
     name: "Orders",
     href: "/orders",
     solidIcon: ordersIconSolid,
     outlineIcon: ordersIconOutLine,
-    id: 3,
+    id: 4,
   },
   {
     name: "Assets",
     href: "/assets",
     solidIcon: assetsIconSolid,
     outlineIcon: assetsIconOutLine,
-    id: 4,
+    id: 5,
   },
 ];
 

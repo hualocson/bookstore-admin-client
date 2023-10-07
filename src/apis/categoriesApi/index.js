@@ -1,4 +1,4 @@
-import axiosInstance from "../axiosConfigs";
+import  axiosInstance from "../axiosConfigs";
 
 const categoriesApi = {
   createCategory: async (category) => {

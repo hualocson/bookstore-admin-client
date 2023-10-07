@@ -15,12 +15,11 @@ import {
   FolderIcon as assetsIconSolid,
   TagIcon as categoriesIconSolid,
 } from "@heroicons/react/24/solid";
-import AdminProvider from "./AdminProvider";
 
 const navigation = [
   {
     name: "Dashboard",
-    href: "/",
+    href: "/dashboard",
     solidIcon: dashboardIconSolid,
     outlineIcon: dashboardIconOutLine,
     id: 1,
@@ -57,12 +56,12 @@ const navigation = [
 
 const MainLayout = ({ children }) => {
   return (
-    <AdminProvider>
+    <>
       <SideBar navigation={navigation} />
       <main className="py-10 pl-44">
         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
       </main>
-    </AdminProvider>
+    </>
   );
 };
 

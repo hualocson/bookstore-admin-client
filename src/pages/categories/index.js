@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { Skeleton } from "@nextui-org/react";
 
 const CategoriesPage = () => {
   const [open, setOpen] = useState(false);
@@ -156,15 +157,17 @@ const CategoriesPage = () => {
       </ConfirmDialog>
 
       <div className="py-10">
-        {isLoading || error ? (
-          <p>Loading...</p>
-        ) : (
-          <CategoriesDataTable
-            columns={columns}
-            data={data}
-            onSelectCategory={onSelectCategory}
-          />
-        )}
+          <Skeleton
+            isLoaded={!(isLoading || error)}
+            className="rounded-md"
+            
+          >
+            <CategoriesDataTable
+              columns={columns}
+              data={data}
+              onSelectCategory={onSelectCategory}
+            />
+          </Skeleton>
       </div>
     </MainLayout>
   );

@@ -3,6 +3,7 @@ import store from "@/store";
 import "@/styles/globals.css";
 import Head from "next/head";
 import { Provider } from "react-redux";
+import { NextUIProvider } from "@nextui-org/react";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,7 +12,9 @@ function MyApp({ Component, pageProps }) {
         <title>{"Admin Bookstore"}</title>
       </Head>
       <Provider store={store}>
-        <Component {...pageProps} />
+        <NextUIProvider>
+          <Component {...pageProps} />
+        </NextUIProvider>
         <CustomToastContainer />
       </Provider>
     </>

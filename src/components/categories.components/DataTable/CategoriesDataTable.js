@@ -26,7 +26,7 @@ export function CategoriesDataTable({ columns, data, onSelectCategory }) {
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="border rounded-lg">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

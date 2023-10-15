@@ -1,4 +1,5 @@
-import Gallery from "@/components/assets.components/Gallery";
+import { assetsApi } from "@/apis";
+import Gallery from "@/components/assets/Gallery";
 import MainLayout from "@/components/layouts/Layout";
 import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/Dialog";
@@ -6,9 +7,8 @@ import Dropzone from "@/components/ui/Dropzone";
 import useAssets from "@/hooks/useAssets";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { assetsApi } from "@/apis";
 
-import { cn, handleErrorResponse } from "@/utils/common-functions";
+import { handleErrorResponse } from "@/utils/common-functions";
 
 const AssetsPage = () => {
   const { data, error, isLoading, mutate } = useAssets();

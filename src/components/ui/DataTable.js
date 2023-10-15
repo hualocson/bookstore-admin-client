@@ -1,5 +1,3 @@
-"use client";
-
 import {
   flexRender,
   getCoreRowModel,
@@ -15,22 +13,23 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 
-export function CategoriesDataTable({ columns, data, onSelectCategory }) {
+const DataTable = ({ columns, data, meta }) => {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    meta: {
-      updateTable: onSelectCategory,
-    },
+    meta,
   });
 
   return (
-    <div className="border rounded-lg">
+    <div className="rounded-lg overflow-hidden">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow
+              key={headerGroup.id}
+              className="bg-grayscale-900/60 border-semi-grayscale-400 hover:bg-grayscale-900/60"
+            >
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead key={header.id}>
@@ -52,6 +51,7 @@ export function CategoriesDataTable({ columns, data, onSelectCategory }) {
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className="bg-semi-grayscale-900 border-semi-grayscale-500"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
@@ -62,7 +62,10 @@ export function CategoriesDataTable({ columns, data, onSelectCategory }) {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
+              <TableCell
+                colSpan={columns.length}
+                className="h-12 text-center bg-semi-grayscale-900"
+              >
                 No results.
               </TableCell>
             </TableRow>
@@ -71,4 +74,6 @@ export function CategoriesDataTable({ columns, data, onSelectCategory }) {
       </Table>
     </div>
   );
-}
+};
+
+export default DataTable;

@@ -1,7 +1,7 @@
 import { categoriesApi } from "@/apis";
-import CategoryForm from "@/components/categories.components/CategoryForm";
-import { CategoriesDataTable } from "@/components/categories.components/DataTable/CategoriesDataTable";
-import { columns } from "@/components/categories.components/DataTable/columns";
+import CategoryForm from "@/components/categories/CategoryForm";
+import { CategoriesDataTable } from "@/components/categories/DataTable/CategoriesDataTable";
+import { columns } from "@/components/categories/DataTable/columns";
 import MainLayout from "@/components/layouts/Layout";
 import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/Dialog";
@@ -157,17 +157,13 @@ const CategoriesPage = () => {
       </ConfirmDialog>
 
       <div className="py-10">
-          <Skeleton
-            isLoaded={!(isLoading || error)}
-            className="rounded-md"
-            
-          >
-            <CategoriesDataTable
-              columns={columns}
-              data={data}
-              onSelectCategory={onSelectCategory}
-            />
-          </Skeleton>
+        <Skeleton isLoaded={!(isLoading || error)} className="rounded-md">
+          <CategoriesDataTable
+            columns={columns}
+            data={data}
+            onSelectCategory={onSelectCategory}
+          />
+        </Skeleton>
       </div>
     </MainLayout>
   );

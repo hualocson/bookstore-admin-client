@@ -1,6 +1,6 @@
 import { useState } from "react";
-import InputWithLabel from "../ui/InputWithLabel";
 import { ComboboxDemo } from "../ui/Combobox";
+import InputWithLabel from "../ui/InputWithLabel";
 
 const CategoryForm = ({ dataRef, categories }) => {
   const [formData, setFormData] = useState(dataRef.current);

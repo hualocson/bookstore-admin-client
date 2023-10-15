@@ -1,19 +1,19 @@
 import SideBar from "./Sidebar";
 
 import {
-  InboxStackIcon as productsIconOutLine,
-  HomeIcon as dashboardIconOutLine,
-  DocumentTextIcon as ordersIconOutLine,
   FolderIcon as assetsIconOutLine,
   TagIcon as categoriesIconOutLine,
+  HomeIcon as dashboardIconOutLine,
+  DocumentTextIcon as ordersIconOutLine,
+  InboxStackIcon as productsIconOutLine,
 } from "@heroicons/react/24/outline";
 
 import {
-  InboxStackIcon as productsIconSolid,
-  HomeIcon as dashboardIconSolid,
-  DocumentTextIcon as ordersIconSolid,
   FolderIcon as assetsIconSolid,
   TagIcon as categoriesIconSolid,
+  HomeIcon as dashboardIconSolid,
+  DocumentTextIcon as ordersIconSolid,
+  InboxStackIcon as productsIconSolid,
 } from "@heroicons/react/24/solid";
 
 const navigation = [
@@ -58,7 +58,7 @@ const MainLayout = ({ children }) => {
   return (
     <>
       <SideBar navigation={navigation} />
-      <main className="py-10 pl-44">
+      <main className="py-10 pl-44 bg-grayscale-950">
         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
       </main>
     </>

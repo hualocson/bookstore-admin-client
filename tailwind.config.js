@@ -25,6 +25,7 @@ module.exports = {
           800: "#962c16",
           900: "#792715",
           950: "#411109",
+          DEFAULT: "#f58542",
         },
         accent: {
           50: "#f8f8f8",
@@ -51,6 +52,7 @@ module.exports = {
           800: "#2b4441",
           900: "#273a38",
           950: "#12211f",
+          DEFAULT: "#3a6761",
         },
         danger: {
           50: "#fef3f2",
@@ -64,6 +66,7 @@ module.exports = {
           800: "#9d2717",
           900: "#82261a",
           950: "#470f08",
+          DEFAULT: "#e23720",
         },
         grayscale: {
           50: "#f3f6fb",
@@ -77,6 +80,7 @@ module.exports = {
           800: "#434e8a",
           900: "#39426f",
           950: "#2d3250",
+          DEFAULT: "#6b85c6",
         },
         "semi-grayscale": {
           50: "#f4f6fa",
@@ -106,8 +110,7 @@ module.exports = {
   plugins: [
     require("tailwindcss-animate"),
     nextui({
-      prefix: "nextui", // prefix for themes variables
-      addCommonColors: false,
+      addCommonColors: true,
       defaultTheme: "dark",
       defaultExtendTheme: "dark",
       themes: {
@@ -115,6 +118,36 @@ module.exports = {
           colors: {
             background: "#2d3250",
             foreground: "#f8f8f8",
+            primary: {
+              50: "#fef6ee",
+              100: "#feead6",
+              200: "#fbd1ad",
+              300: "#f9b17a",
+              400: "#f58542",
+              500: "#f2631d",
+              600: "#e34a13",
+              700: "#bd3611",
+              800: "#962c16",
+              900: "#792715",
+              950: "#411109",
+              DEFAULT: "#f2631d",
+              foreground: "#fef6ee",
+            },
+            danger: {
+              50: "#fef3f2",
+              100: "#ffe4e1",
+              200: "#ffcec8",
+              300: "#ffada2",
+              400: "#fd8b7c",
+              500: "#f5533e",
+              600: "#e23720",
+              700: "#bf2a16",
+              800: "#9d2717",
+              900: "#82261a",
+              950: "#470f08",
+              DEFAULT: "#e23720",
+              foreground: "#ffe4e1",
+            },
           },
         },
       },

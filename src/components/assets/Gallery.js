@@ -1,8 +1,8 @@
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
-import Tooltip from "../ui/Tooltip";
 import Image from "next/image";
-import Button from "../ui/Button";
 import { toast } from "react-toastify";
+import Button from "../ui/Button";
+import Tooltip from "../ui/Tooltip";
 
 const Gallery = ({ imageList = [] }) => {
   const copyUrl = async (url) => {

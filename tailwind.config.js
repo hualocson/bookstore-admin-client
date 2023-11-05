@@ -39,6 +39,7 @@ module.exports = {
           800: "#464646",
           900: "#3d3d3d",
           950: "#292929",
+          DEFAULT: "#eeeeee",
         },
         success: {
           50: "#f4f9f8",
@@ -110,14 +111,13 @@ module.exports = {
   plugins: [
     require("tailwindcss-animate"),
     nextui({
-      addCommonColors: true,
       defaultTheme: "dark",
       defaultExtendTheme: "dark",
       themes: {
         dark: {
           colors: {
             background: "#2d3250",
-            foreground: "#f8f8f8",
+            foreground: "#eeeeee",
             primary: {
               50: "#fef6ee",
               100: "#feead6",

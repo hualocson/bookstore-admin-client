@@ -14,8 +14,8 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <NextUIProvider>
           <Component {...pageProps} />
+          <CustomToastContainer />
         </NextUIProvider>
-        <CustomToastContainer />
       </Provider>
     </>
   );

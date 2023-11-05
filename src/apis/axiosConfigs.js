@@ -1,7 +1,8 @@
 import axios from "axios";
+import env from "@/utils/vars";
 
 const axiosInstance = axios.create({
-  baseURL: "/api/admin/v1",
+  baseURL: env.BASE_URL,
 });
 // Response interceptor to handle successful responses
 axiosInstance.interceptors.response.use(

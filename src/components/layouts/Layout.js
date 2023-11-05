@@ -58,7 +58,7 @@ const MainLayout = ({ children }) => {
   return (
     <>
       <SideBar navigation={navigation} />
-      <main className="py-10 pl-44 bg-grayscale-950">
+      <main className="py-10 pl-44">
         <div className="px-4 sm:px-6 lg:px-8">{children}</div>
       </main>
     </>

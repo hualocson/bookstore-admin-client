@@ -31,7 +31,7 @@ import { Label } from "@radix-ui/react-label";
  * @param {Object} props.onSelectedValueChange - callback function when selected value changes
  * @returns
  */
-export function ComboboxDemo({
+export function Combobox({
   data,
   label = "Label",
   searchPlaceholder = "Search...",

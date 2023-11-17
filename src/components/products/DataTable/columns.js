@@ -7,6 +7,7 @@ import {
   PencilSquareIcon as EditIcon,
   EllipsisHorizontalIcon,
   ArrowUturnLeftIcon as RestoreIcon,
+  EyeIcon,
 } from "@heroicons/react/24/solid";
 import {
   Dropdown,
@@ -38,7 +39,7 @@ export const columns = [
           src={imageUrl}
           width={80}
           height={50}
-          className="object-contain layout-fill h-auto"
+          className="object-contain h-auto"
           priority
           alt={`category-image-${row.getValue("id")}`}
         />
@@ -98,6 +99,14 @@ export const columns = [
           status: row.original.deletedAt ? "default" : "hidden",
         },
         {
+          key: "more",
+          label: "View detail",
+          icon: (
+            <EyeIcon className={iconClass} strokeWidth={1.5} />
+          ),
+          status: "default",
+        },
+        {
           key: "delete",
           label: "Delete",
           icon: <DeleteIcon className={iconClass} strokeWidth={1.5} />,
@@ -124,8 +133,8 @@ export const columns = [
       return (
         <Dropdown>
           <DropdownTrigger>
-            <Button variant="faded" isIconOnly size="xs">
-              <EllipsisHorizontalIcon className="h-6 w-6" strokeWidth={1.5} />
+            <Button variant="flat" isIconOnly size="xs">
+              <EllipsisHorizontalIcon className="h-5 w-5" strokeWidth={1.5} />
             </Button>
           </DropdownTrigger>
           <DropdownMenu

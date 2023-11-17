@@ -23,7 +23,7 @@ export const handleErrorResponse = (error) => {
     console.error("Get response error: ", error.response);
 
     return {
-      message: data.error.message,
+      message: data.error?.message ?? "Something went wrong",
       statusCode: status || 400,
     };
   } else if (error.request) {

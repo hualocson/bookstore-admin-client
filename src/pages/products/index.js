@@ -7,6 +7,7 @@ import { handleErrorResponse } from "@/utils/common-functions";
 import { Tab, Tabs } from "@nextui-org/react";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import dayjs from "dayjs";
 
 const ProductsPage = () => {
   const filterOptions = [
@@ -37,18 +38,43 @@ const ProductsPage = () => {
     price: "",
     quantity: "",
     status: "",
+    author: "",
+    pages: "",
+    publisher: "",
+    publicationDate: "",
   });
 
   const handleSubmit = async (data) => {
     let res;
     if (formData.current.id !== "") {
-      res = await productsApi.update({ id: formData.current.id, ...data });
+      res = await productsApi.update({
+        id: formData.current.id,
+        ...data,
+      });
+      if (data.author !== "") {
+        await productsApi.updateDetail({
+          id: formData.current.id,
+          author: data.author,
+          pages: data.pages,
+          publisher: data.publisher,
+          publicationDate: dayjs(data.publicationDate).format(),
+        });
+      }
     } else {
       res = await productsApi.create(data);
+      if (data.author !== "" && res.data) {
+        await productsApi.createDetail({
+          productId: formData.current.id,
+          author: data.author,
+          pages: data.pages,
+          publisher: data.publisher,
+          publicationDate: dayjs(data.publicationDate).format(),
+        });
+      }
     }
-    const { success, error } = res;
+    const { data: response, error } = res;
 
-    if (success) {
+    if (response) {
       mutate();
       toast.success(
         formData.current.id !== ""
@@ -76,7 +102,7 @@ const ProductsPage = () => {
   };
 
   // update state data before update product
-  const onSelectCategory = (productData) => {
+  const onSelectProduct = (productData) => {
     formData.current = { ...productData, mode: "edit" };
     onOpen();
   };
@@ -125,6 +151,10 @@ const ProductsPage = () => {
       price: "",
       quantity: "",
       status: "",
+      author: "",
+      pages: "",
+      publisher: "",
+      publicationDate: "",
     };
   };
 
@@ -156,7 +186,7 @@ const ProductsPage = () => {
         </div>
         <ProductDataTable
           data={data}
-          onSelectRow={onSelectCategory}
+          onSelectRow={onSelectProduct}
           onDelete={onDelete}
           onRestore={onRestore}
         />

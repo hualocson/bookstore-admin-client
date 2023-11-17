@@ -3,15 +3,15 @@ import axiosInstance from "../axiosConfigs";
 const productsApi = {
   create: async (product) => {
     try {
-      await axiosInstance.post("/products", product);
+      const res = await axiosInstance.post("/products", product);
       return {
-        success: true,
+        data: res,
         error: undefined,
       };
     } catch (error) {
       console.log("error create product", error);
       return {
-        success: false,
+        data: false,
         error,
       };
     }
@@ -56,6 +56,56 @@ const productsApi = {
       };
     } catch (error) {
       console.log("error restore product", error);
+      return {
+        success: false,
+        error,
+      };
+    }
+  },
+
+  // detail
+  createDetail: async ({
+    productId,
+    author,
+    pages,
+    publisher,
+    publicationDate,
+  }) => {
+    try {
+      await axiosInstance.post("/product-details", {
+        productId,
+        author,
+        pages,
+        publisher,
+        publicationDate,
+      });
+      return {
+        success: true,
+        error: undefined,
+      };
+    } catch (error) {
+      console.log("error create product", error);
+      return {
+        success: false,
+        error,
+      };
+    }
+  },
+
+  updateDetail: async ({ id, pages, author, publisher, publicationDate }) => {
+    try {
+      await axiosInstance.patch(`/product-details/${id}`, {
+        pages,
+        author,
+        publisher,
+        publicationDate,
+      });
+      return {
+        success: true,
+        error: undefined,
+      };
+    } catch (error) {
+      console.log("error update product", error);
       return {
         success: false,
         error,

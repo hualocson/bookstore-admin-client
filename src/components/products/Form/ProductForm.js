@@ -1,21 +1,20 @@
 import { MyButton as Button } from "@/components/ui/next-ui/MyButton";
-import useCategories from "@/hooks/useCategories";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   Button as NextButton,
-  Select,
-  SelectItem,
-  Textarea,
+  Switch,
   useDisclosure,
 } from "@nextui-org/react";
-import { Controller, useForm } from "react-hook-form";
-import schema from "./Schema";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import ProductBasicFrom from "./ProductBasicFrom";
+import ProductDetailForm from "./ProductDetailForm";
+import schema from "./schema";
 
 const ProductForm = ({
   onSubmit,
@@ -30,19 +29,30 @@ const ProductForm = ({
     onOpen: onOpenProp,
     onClose: onCloseProp,
   });
-  const { data: categories, isLoading } = useCategories();
+
+  const [isShowDetail, setIsShowDetail] = useState(false);
 
   const {
     handleSubmit,
     control,
     formState: { errors },
     clearErrors,
+    unregister,
   } = useForm({
     values: {
       ...initData,
     },
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    if (isShowDetail === false) {
+      unregister("author");
+      unregister("pages");
+      unregister("publisher");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShowDetail]);
 
   return (
     <>
@@ -54,7 +64,7 @@ const ProductForm = ({
         onOpenChange={onOpenChange}
         placement="top-center"
         backdrop="blur"
-        size="lg"
+        size={isShowDetail ? "5xl" : "lg"}
         onClose={() => {
           clearErrors();
           resetFormData();
@@ -64,157 +74,31 @@ const ProductForm = ({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {"Add new book"}
+                {initData.id !== "" ? "Update product" : "Add new book"}
+                <Switch
+                  isSelected={isShowDetail}
+                  onValueChange={setIsShowDetail}
+                  size="sm"
+                >
+                  Show detail
+                </Switch>
               </ModalHeader>
-              <ModalBody>
-                <Controller
+              <ModalBody className="grid grid-cols-2">
+                <ProductBasicFrom
+                  isShowDetail={isShowDetail}
+                  initData={initData}
                   control={control}
-                  name="name"
-                  render={({ field }) => (
-                    <Input
-                      autoFocus
-                      label="Name"
-                      labelPlacement="inside"
-                      variant="faded"
-                      classNames={{
-                        inputWrapper: [
-                          "group-data-[focus=true]:border-primary",
-                          "group-data-[focus-visible=true]:ring-0",
-                          "group-data-[focus-visible=true]:ring-offset-0",
-                        ],
-                      }}
-                      isInvalid={false}
-                      errorMessage={errors.name?.message}
-                      autoComplete="off"
-                      isRequired
-                      {...field}
-                    />
-                  )}
+                  errors={errors}
                 />
-                <Controller
-                  control={control}
-                  name="image"
-                  render={({ field }) => (
-                    <Input
-                      label="Image"
-                      labelPlacement="inside"
-                      variant="faded"
-                      classNames={{
-                        inputWrapper: [
-                          "group-data-[focus=true]:border-primary",
-                          "group-data-[focus-visible=true]:ring-0",
-                          "group-data-[focus-visible=true]:ring-offset-0",
-                        ],
-                      }}
-                      isInvalid={errors.image}
-                      errorMessage={errors.image?.message}
-                      onValueChange={field.onChange}
-                      {...field}
-                      autoComplete="off"
-                      isRequired
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name="categoryId"
-                  render={({ field }) => (
-                    <Select
-                      label="Select a category"
-                      variant="faded"
-                      isInvalid={errors.categoryId}
-                      errorMessage={errors.categoryId?.message}
-                      selectionMode="single"
-                      items={categories}
-                      isRequired
-                      isLoading={isLoading}
-                      defaultSelectedKeys={
-                        initData.categoryId !== ""
-                          ? [initData.categoryId.toString()]
-                          : []
-                      }
-                      {...field}
-                    >
-                      {(category) => (
-                        <SelectItem
-                          key={category.id}
-                          value={category.id}
-                          textValue={category.name}
-                        >
-                          {category.name}
-                        </SelectItem>
-                      )}
-                    </Select>
-                  )}
-                />
-
-                <Controller
-                  control={control}
-                  name="price"
-                  render={({ field }) => (
-                    <Input
-                      label="Price"
-                      labelPlacement="inside"
-                      variant="faded"
-                      classNames={{
-                        inputWrapper: [
-                          "group-data-[focus=true]:border-primary",
-                          "group-data-[focus-visible=true]:ring-0",
-                          "group-data-[focus-visible=true]:ring-offset-0",
-                        ],
-                      }}
-                      isInvalid={errors.price}
-                      errorMessage={errors.price?.message}
-                      onValueChange={field.onChange}
-                      {...field}
-                      autoComplete="off"
-                      isRequired
-                    />
-                  )}
-                />
-
-                <Controller
-                  control={control}
-                  name="quantity"
-                  render={({ field }) => (
-                    <Input
-                      label="Quantity"
-                      labelPlacement="inside"
-                      variant="faded"
-                      classNames={{
-                        inputWrapper: [
-                          "group-data-[focus=true]:border-primary",
-                          "group-data-[focus-visible=true]:ring-0",
-                          "group-data-[focus-visible=true]:ring-offset-0",
-                        ],
-                      }}
-                      isInvalid={errors.quantity}
-                      errorMessage={errors.quantity?.message}
-                      {...field}
-                      autoComplete="off"
-                      isRequired
-                    />
-                  )}
-                />
-
-                <Controller
-                  control={control}
-                  name="description"
-                  render={({ field }) => (
-                    <Textarea
-                      label="Description"
-                      variant="faded"
-                      labelPlacement="inside"
-                      {...field}
-                    />
-                  )}
-                />
+                {isShowDetail && (
+                  <ProductDetailForm control={control} errors={errors} />
+                )}
               </ModalBody>
               <ModalFooter>
                 <NextButton color="danger" variant="light" onPress={onClose}>
                   Close
                 </NextButton>
-                <Button color="primary" onPress={handleSubmit(onSubmit)}>
+                <Button color="primary" onClick={handleSubmit(onSubmit)}>
                   Submit
                 </Button>
               </ModalFooter>

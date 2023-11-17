@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ComboboxDemo } from "../ui/Combobox";
+import { Combobox } from "../ui/Combobox";
 import InputWithLabel from "../ui/InputWithLabel";
 
 const CategoryForm = ({ dataRef, categories }) => {
@@ -23,7 +23,7 @@ const CategoryForm = ({ dataRef, categories }) => {
         onChange={(e) => onInputChange("name", e.target.value)}
       />
 
-      <ComboboxDemo
+      <Combobox
         label="Parent category"
         placeholder="Select parent category"
         searchPlaceholder="Search parent category..."

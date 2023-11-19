@@ -8,6 +8,7 @@ import { Tab, Tabs } from "@nextui-org/react";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
+import { parseISO } from "date-fns";
 
 const ProductsPage = () => {
   const filterOptions = [
@@ -72,9 +73,11 @@ const ProductsPage = () => {
         });
       }
     }
-    const { data: response, error } = res;
-
-    if (response) {
+    const { data: response, error, success } = res;
+    if (error) {
+      const { message } = handleErrorResponse(error);
+      toast.error(message);
+    } else {
       mutate();
       toast.success(
         formData.current.id !== ""
@@ -83,11 +86,6 @@ const ProductsPage = () => {
       );
       onClose();
       return;
-    }
-
-    if (error) {
-      const { message } = handleErrorResponse(error);
-      toast.error(message);
     }
   };
 
@@ -103,7 +101,13 @@ const ProductsPage = () => {
 
   // update state data before update product
   const onSelectProduct = (productData) => {
-    formData.current = { ...productData, mode: "edit" };
+    formData.current = {
+      ...productData,
+      publicationDate: productData.publicationDate
+        ? parseISO(productData.publicationDate)
+        : "",
+      mode: "edit",
+    };
     onOpen();
   };
 

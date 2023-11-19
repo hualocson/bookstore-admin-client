@@ -9,7 +9,7 @@ import {
   PopoverTrigger,
 } from "@nextui-org/react";
 
-function DatePicker({ selectedDate, setSelectedDate }) {
+function DatePicker({ selectedDate, setSelectedDate, ...props }) {
   return (
     <Popover placement="bottom">
       <PopoverTrigger>
@@ -28,6 +28,7 @@ function DatePicker({ selectedDate, setSelectedDate }) {
           selected={selectedDate}
           onSelect={setSelectedDate}
           initialFocus
+          {...props}
         />
       </PopoverContent>
     </Popover>

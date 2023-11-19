@@ -1,27 +1,30 @@
-import CustomChip from "@/components/ui/next-ui/Chip";
 import { ProductStatus } from "@/utils/constants";
 
+import { priceFormatter } from "@/utils/common-functions";
 import {
   TrashIcon as DeleteIcon,
   PencilSquareIcon as EditIcon,
   EllipsisHorizontalIcon,
-  ArrowUturnLeftIcon as RestoreIcon,
   EyeIcon,
+  ArrowUturnLeftIcon as RestoreIcon,
 } from "@heroicons/react/24/solid";
 import {
+  Button,
+  Chip,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Button,
 } from "@nextui-org/react";
 import Image from "next/image";
-import { priceFormatter } from "@/utils/common-functions";
 
 export const columns = [
   {
     accessorKey: "id",
     header: "Id",
+    cell: ({ getValue }) => {
+      return <span>{`P#${getValue()}`}</span>;
+    },
   },
   {
     accessorKey: "name",
@@ -38,9 +41,9 @@ export const columns = [
       return (
         <Image
           src={imageUrl}
-          width={80}
-          height={50}
-          className="object-contain h-auto"
+          width={60}
+          height={120}
+          className="object-contain h-auto rounded shadow-lg"
           priority
           alt={`category-image-${row.getValue("id")}`}
         />
@@ -68,9 +71,13 @@ export const columns = [
       switch (status) {
         case ProductStatus.IN_STOCK:
           return (
-            <CustomChip size="md" variant={"solid"}>
+            <Chip
+              size="md"
+              variant={"flat"}
+              className="text-success-300 bg-success-400/30"
+            >
               {statusName}
-            </CustomChip>
+            </Chip>
           );
         case ProductStatus.OUT_OF_STOCK:
           return <span className="text-red-500">{statusName}</span>;

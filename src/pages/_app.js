@@ -13,8 +13,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Provider store={store}>
         <NextUIProvider>
-          <Component {...pageProps} />
-          <CustomToastContainer />
+          <div className="dark">
+            <Component {...pageProps} />
+            <CustomToastContainer />
+          </div>
         </NextUIProvider>
       </Provider>
     </>

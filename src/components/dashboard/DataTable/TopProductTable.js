@@ -9,9 +9,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import DataTableToolbar from "./DataTableToolbar";
 
-const OrdersDataTable = ({ data, onOpenModal }) => {
+const TopProductTable = ({ data }) => {
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
     data,
@@ -25,16 +24,12 @@ const OrdersDataTable = ({ data, onOpenModal }) => {
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    meta: {
-      openModal: onOpenModal,
-    },
   });
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
       <DataTable table={table} colLength={columns.length} />
     </div>
   );
 };
 
-export default OrdersDataTable;
+export default TopProductTable;

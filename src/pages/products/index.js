@@ -65,7 +65,7 @@ const ProductsPage = () => {
       res = await productsApi.create(data);
       if (data.author !== "" && res.data) {
         await productsApi.createDetail({
-          productId: formData.current.id,
+          id: res.data.newProduct.id,
           author: data.author,
           pages: data.pages,
           publisher: data.publisher,

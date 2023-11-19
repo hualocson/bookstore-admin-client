@@ -25,7 +25,7 @@ module.exports = {
           800: "#962c16",
           900: "#792715",
           950: "#411109",
-          DEFAULT: "#f58542",
+          DEFAULT: "#f9b17a",
         },
         accent: {
           50: "#f8f8f8",
@@ -53,7 +53,7 @@ module.exports = {
           800: "#2b4441",
           900: "#273a38",
           950: "#12211f",
-          DEFAULT: "#3a6761",
+          DEFAULT: "#649b92",
         },
         danger: {
           50: "#fef3f2",
@@ -67,7 +67,7 @@ module.exports = {
           800: "#9d2717",
           900: "#82261a",
           950: "#470f08",
-          DEFAULT: "#e23720",
+          DEFAULT: "#f5533e",
         },
         grayscale: {
           50: "#f3f6fb",
@@ -112,7 +112,6 @@ module.exports = {
     require("tailwindcss-animate"),
     nextui({
       defaultTheme: "dark",
-      defaultExtendTheme: "dark",
       themes: {
         dark: {
           colors: {
@@ -130,8 +129,23 @@ module.exports = {
               800: "#962c16",
               900: "#792715",
               950: "#411109",
-              DEFAULT: "#f2631d",
-              foreground: "#fef6ee",
+              DEFAULT: "#f9b17a",
+              foreground: "#39426f",
+            },
+            secondary: {
+              50: "#f3f6fb",
+              100: "#e4eaf5",
+              200: "#cfdaee",
+              300: "#aec2e2",
+              400: "#87a2d3",
+              500: "#6b85c6",
+              600: "#576eb9",
+              700: "#4d5da8",
+              800: "#434e8a",
+              900: "#39426f",
+              950: "#2d3250",
+              DEFAULT: "#6b85c6",
+              foreground: "#39426f",
             },
             danger: {
               50: "#fef3f2",

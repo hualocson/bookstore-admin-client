@@ -1,6 +1,7 @@
 import { columns } from "@/components/products/DataTable/columns";
 import DataTable from "@/components/ui/DataTable";
 import ConfirmModal from "@/components/ui/next-ui/ConfirmModal";
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useState } from "react";
 const ProductDataTable = ({ data, onSelectRow, onDelete, onRestore }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,17 +13,20 @@ const ProductDataTable = ({ data, onSelectRow, onDelete, onRestore }) => {
     setSelectedId(id);
     setIsOpen(true);
   };
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    meta: {
+      onSelectRow,
+      onDelete: handleOnDelete,
+      onRestore,
+    },
+  });
   return (
     <>
-      <DataTable
-        columns={columns}
-        data={data}
-        meta={{
-          onSelectRow,
-          onDelete: handleOnDelete,
-          onRestore,
-        }}
-      />
+      <DataTable table={table} colLength={columns.length} />
 
       <ConfirmModal
         isOpenProps={isOpen}

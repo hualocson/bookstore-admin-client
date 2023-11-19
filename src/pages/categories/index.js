@@ -3,7 +3,7 @@ import CategoryForm from "@/components/categories/CategoryForm";
 import { CategoriesDataTable } from "@/components/categories/DataTable/CategoriesDataTable";
 import { columns } from "@/components/categories/DataTable/columns";
 import MainLayout from "@/components/layouts/Layout";
-import Button from "@/components/ui/Button";
+import { Button } from "@nextui-org/react";
 import ConfirmDialog from "@/components/ui/Dialog";
 import useCategories from "@/hooks/useCategories";
 import { handleErrorResponse } from "@/utils/common-functions";
@@ -135,9 +135,9 @@ const CategoriesPage = () => {
         <ConfirmDialog
           trigger={
             <Button
-              variant="primary"
               size="md"
-              icon={<PlusIcon className="h-4 w-4" />}
+              color="primary"
+              startContent={<PlusIcon className="h-4 w-4" />}
             >
               Add
             </Button>

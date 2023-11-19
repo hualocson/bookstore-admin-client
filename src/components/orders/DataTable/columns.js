@@ -16,6 +16,10 @@ export const columns = [
       const id = getValue();
       return <span>{getLastCharacters(hashText(String(id)))}</span>;
     },
+    filterFn: (row, id, value) => {
+      const hashedId = hashText(String(row.getValue(id)));
+      return hashedId.includes(value);
+    },
   },
   {
     accessorKey: "createdAt",
@@ -63,14 +67,14 @@ export const columns = [
             <Chip
               size="md"
               variant={"flat"}
-              className="bg-blue-300/20 text-blue-400/60"
+              className="bg-blue-400/20 text-blue-300"
             >
-              {"Processed"}
+              {"Delivering"}
             </Chip>
           );
         case OrderStatus.DELIVERED:
           return (
-            <Chip className="bg-green-300/20 text-green-400/60">
+            <Chip className="bg-success-400/40 text-success-300">
               {"Delivered"}
             </Chip>
           );
@@ -83,6 +87,9 @@ export const columns = [
         default:
           return null;
       }
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
     },
   },
   {

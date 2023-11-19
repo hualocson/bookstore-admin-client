@@ -67,6 +67,10 @@ const OrderDetail = ({ order, orderItems }) => {
         <div className="flex justify-end">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between gap-4">
+              <span>Subtotal</span>
+              <span>{priceFormatter(order.total - order.shippingFee)}</span>
+            </div>
+            <div className="flex justify-between gap-4">
               <span>Shipping</span>
               <span>{priceFormatter(order.shippingFee)}</span>
             </div>

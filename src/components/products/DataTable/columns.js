@@ -1,7 +1,6 @@
 import CustomChip from "@/components/ui/next-ui/Chip";
 import { ProductStatus } from "@/utils/constants";
 
-import { MyButton as Button } from "@/components/ui/next-ui/MyButton";
 import {
   TrashIcon as DeleteIcon,
   PencilSquareIcon as EditIcon,
@@ -14,8 +13,10 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Button,
 } from "@nextui-org/react";
 import Image from "next/image";
+import { priceFormatter } from "@/utils/common-functions";
 
 export const columns = [
   {
@@ -26,7 +27,7 @@ export const columns = [
     accessorKey: "name",
     header: "Name",
     cell: ({ getValue }) => {
-      return <div>{getValue()}</div>;
+      return <div className="max-w-xs line-clamp-2">{getValue()}</div>;
     },
   },
   {
@@ -44,6 +45,14 @@ export const columns = [
           alt={`category-image-${row.getValue("id")}`}
         />
       );
+    },
+  },
+  {
+    accessorKey: "price",
+    header: "Price",
+    cell: ({ getValue }) => {
+      const price = getValue();
+      return <span>{priceFormatter(price)}</span>;
     },
   },
   {
@@ -101,9 +110,7 @@ export const columns = [
         {
           key: "more",
           label: "View detail",
-          icon: (
-            <EyeIcon className={iconClass} strokeWidth={1.5} />
-          ),
+          icon: <EyeIcon className={iconClass} strokeWidth={1.5} />,
           status: "default",
         },
         {
@@ -133,7 +140,7 @@ export const columns = [
       return (
         <Dropdown>
           <DropdownTrigger>
-            <Button variant="flat" isIconOnly size="xs">
+            <Button variant="light" color="primary" isIconOnly size="sm">
               <EllipsisHorizontalIcon className="h-5 w-5" strokeWidth={1.5} />
             </Button>
           </DropdownTrigger>

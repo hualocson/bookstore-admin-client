@@ -1,8 +1,4 @@
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 
 import {
   Table,
@@ -13,14 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 
-const DataTable = ({ columns, data, meta }) => {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    meta,
-  });
-
+const DataTable = ({ table, colLength }) => {
   return (
     <div className="rounded-lg overflow-hidden">
       <Table>
@@ -63,7 +52,7 @@ const DataTable = ({ columns, data, meta }) => {
           ) : (
             <TableRow>
               <TableCell
-                colSpan={columns.length}
+                colSpan={colLength}
                 className="h-12 text-center bg-semi-grayscale-900"
               >
                 No results.

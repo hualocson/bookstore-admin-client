@@ -1,4 +1,3 @@
-import { MyButton as Button } from "@/components/ui/next-ui/MyButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Modal,
@@ -6,7 +5,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Button as NextButton,
+  Button,
   Switch,
   useDisclosure,
 } from "@nextui-org/react";
@@ -95,9 +94,9 @@ const ProductForm = ({
                 )}
               </ModalBody>
               <ModalFooter>
-                <NextButton color="danger" variant="light" onPress={onClose}>
+                <Button color="danger" variant="light" onPress={onClose}>
                   Close
-                </NextButton>
+                </Button>
                 <Button color="primary" onClick={handleSubmit(onSubmit)}>
                   Submit
                 </Button>

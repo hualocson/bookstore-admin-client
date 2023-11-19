@@ -54,6 +54,9 @@ const ProductDetailForm = ({ control, errors }) => {
             selectedDate={field.value}
             setSelectedDate={field.onChange}
             field={field}
+            captionLayout="dropdown-buttons"
+            fromYear={2002}
+            toYear={2024}
           />
         )}
       />

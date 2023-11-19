@@ -64,16 +64,10 @@ const productsApi = {
   },
 
   // detail
-  createDetail: async ({
-    productId,
-    author,
-    pages,
-    publisher,
-    publicationDate,
-  }) => {
+  createDetail: async ({ id, author, pages, publisher, publicationDate }) => {
     try {
       await axiosInstance.post("/product-details", {
-        productId,
+        id,
         author,
         pages,
         publisher,

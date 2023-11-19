@@ -1,6 +1,5 @@
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
-import * as React from "react";
 
 import { Calendar } from "@/components/ui/Calendar";
 import {
@@ -10,14 +9,14 @@ import {
   PopoverTrigger,
 } from "@nextui-org/react";
 
-function DatePicker({ selectedDate, setSelectedDate }) {
+function DatePicker({ selectedDate, setSelectedDate, ...props }) {
   return (
     <Popover placement="bottom">
       <PopoverTrigger>
         <Button variant={"solid"} className="justify-start py-7" size="lg">
           <CalendarIcon className="h-4 w-4" />
           {selectedDate && selectedDate !== "" ? (
-            format(parseISO(selectedDate), "MM/dd/yyyy")
+            format(selectedDate, "MM/dd/yyyy")
           ) : (
             <span>Publication Date</span>
           )}
@@ -29,6 +28,7 @@ function DatePicker({ selectedDate, setSelectedDate }) {
           selected={selectedDate}
           onSelect={setSelectedDate}
           initialFocus
+          {...props}
         />
       </PopoverContent>
     </Popover>

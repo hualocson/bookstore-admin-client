@@ -1,15 +1,16 @@
-import CustomChip from "@/components/ui/next-ui/Chip";
 import { ProductStatus } from "@/utils/constants";
 
-import { MyButton as Button } from "@/components/ui/next-ui/MyButton";
+import { priceFormatter } from "@/utils/common-functions";
 import {
   TrashIcon as DeleteIcon,
   PencilSquareIcon as EditIcon,
   EllipsisHorizontalIcon,
-  ArrowUturnLeftIcon as RestoreIcon,
   EyeIcon,
+  ArrowUturnLeftIcon as RestoreIcon,
 } from "@heroicons/react/24/solid";
 import {
+  Button,
+  Chip,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -21,12 +22,15 @@ export const columns = [
   {
     accessorKey: "id",
     header: "Id",
+    cell: ({ getValue }) => {
+      return <span>{`P#${getValue()}`}</span>;
+    },
   },
   {
     accessorKey: "name",
     header: "Name",
     cell: ({ getValue }) => {
-      return <div>{getValue()}</div>;
+      return <div className="max-w-xs line-clamp-2">{getValue()}</div>;
     },
   },
   {
@@ -37,13 +41,21 @@ export const columns = [
       return (
         <Image
           src={imageUrl}
-          width={80}
-          height={50}
-          className="object-contain h-auto"
+          width={60}
+          height={120}
+          className="object-contain h-auto rounded shadow-lg"
           priority
           alt={`category-image-${row.getValue("id")}`}
         />
       );
+    },
+  },
+  {
+    accessorKey: "price",
+    header: "Price",
+    cell: ({ getValue }) => {
+      const price = getValue();
+      return <span>{priceFormatter(price)}</span>;
     },
   },
   {
@@ -59,9 +71,13 @@ export const columns = [
       switch (status) {
         case ProductStatus.IN_STOCK:
           return (
-            <CustomChip size="md" variant={"solid"}>
+            <Chip
+              size="md"
+              variant={"flat"}
+              className="text-success-300 bg-success-400/30"
+            >
               {statusName}
-            </CustomChip>
+            </Chip>
           );
         case ProductStatus.OUT_OF_STOCK:
           return <span className="text-red-500">{statusName}</span>;
@@ -101,9 +117,7 @@ export const columns = [
         {
           key: "more",
           label: "View detail",
-          icon: (
-            <EyeIcon className={iconClass} strokeWidth={1.5} />
-          ),
+          icon: <EyeIcon className={iconClass} strokeWidth={1.5} />,
           status: "default",
         },
         {
@@ -133,7 +147,7 @@ export const columns = [
       return (
         <Dropdown>
           <DropdownTrigger>
-            <Button variant="flat" isIconOnly size="xs">
+            <Button variant="light" color="primary" isIconOnly size="sm">
               <EllipsisHorizontalIcon className="h-5 w-5" strokeWidth={1.5} />
             </Button>
           </DropdownTrigger>

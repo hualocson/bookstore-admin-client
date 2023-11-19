@@ -6,4 +6,11 @@ const ProductStatus = {
   BEST_SELLER: 1105,
 };
 
-export { ProductStatus };
+const OrderStatus ={
+  PENDING: 1301,
+  PROCESSED: 1302,
+  DELIVERED: 1303,
+  CANCELLED: 1304,
+}
+
+export { ProductStatus,OrderStatus };

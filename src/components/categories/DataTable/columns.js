@@ -14,6 +14,9 @@ export const columns = [
   {
     accessorKey: "id",
     header: "Id",
+    cell: ({ getValue }) => {
+      return <span>{`C#${getValue()}`}</span>;
+    },
   },
   {
     accessorKey: "name",

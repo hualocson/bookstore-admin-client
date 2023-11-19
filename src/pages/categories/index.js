@@ -3,7 +3,7 @@ import CategoryForm from "@/components/categories/CategoryForm";
 import { CategoriesDataTable } from "@/components/categories/DataTable/CategoriesDataTable";
 import { columns } from "@/components/categories/DataTable/columns";
 import MainLayout from "@/components/layouts/Layout";
-import Button from "@/components/ui/Button";
+import { Button } from "@nextui-org/react";
 import ConfirmDialog from "@/components/ui/Dialog";
 import useCategories from "@/hooks/useCategories";
 import { handleErrorResponse } from "@/utils/common-functions";
@@ -129,35 +129,40 @@ const CategoriesPage = () => {
 
   return (
     <MainLayout>
-      <h2 className="tab-heading mb-4">Categories</h2>
+      <div className="sticky top-0 z-50 bg-background pb-4">
+        <h2 className="tab-heading mb-4">Categories</h2>
 
-      <ConfirmDialog
-        trigger={
-          <Button
-            variant="primary"
-            size="md"
-            icon={<PlusIcon className="h-4 w-4" />}
-          >
-            Add
-          </Button>
-        }
-        asChildTrigger
-        title="Add category"
-        onConfirm={
-          formData.current.mode === "create"
-            ? handleOnCreateCategory
-            : handleOnEditCategory
-        }
-        confirmText={formData.current.mode === "create" ? "Create" : "Update"}
-        desc={"Enter category data below."}
-        open={open}
-        setOpen={setOpen}
-      >
-        <CategoryForm dataRef={formData} categories={data} />
-      </ConfirmDialog>
+        <ConfirmDialog
+          trigger={
+            <Button
+              size="md"
+              color="primary"
+              startContent={<PlusIcon className="h-4 w-4" />}
+            >
+              Add
+            </Button>
+          }
+          asChildTrigger
+          title="Add category"
+          onConfirm={
+            formData.current.mode === "create"
+              ? handleOnCreateCategory
+              : handleOnEditCategory
+          }
+          confirmText={formData.current.mode === "create" ? "Create" : "Update"}
+          desc={"Enter category data below."}
+          open={open}
+          setOpen={setOpen}
+        >
+          <CategoryForm dataRef={formData} categories={data} />
+        </ConfirmDialog>
+      </div>
 
-      <div className="py-10">
-        <Skeleton isLoaded={!(isLoading || error)} className="rounded-md">
+      <div className="flex pb-10">
+        <Skeleton
+          isLoaded={!(isLoading || error)}
+          className="rounded-md basis-2/3"
+        >
           <CategoriesDataTable
             columns={columns}
             data={data}

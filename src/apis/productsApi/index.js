@@ -1,3 +1,4 @@
+import { ProductStatus } from "@/utils/constants";
 import axiosInstance from "../axiosConfigs";
 
 const productsApi = {
@@ -64,7 +65,14 @@ const productsApi = {
   },
 
   // detail
-  createDetail: async ({ id, author, pages, publisher, publicationDate }) => {
+  createDetail: async ({
+    id,
+    author,
+    pages,
+    publisher,
+    publicationDate,
+    status = ProductStatus.IN_STOCK,
+  }) => {
     try {
       await axiosInstance.post("/product-details", {
         id,
@@ -72,6 +80,7 @@ const productsApi = {
         pages,
         publisher,
         publicationDate,
+        status,
       });
       return {
         success: true,

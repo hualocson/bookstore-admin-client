@@ -33,7 +33,7 @@ const DataTableFacetedFilter = ({ column, title, options }) => {
     column?.setFilterValue(filterValues.length ? filterValues : undefined);
   };
   return (
-    <Dropdown>
+    <Dropdown placement="bottom-start">
       <DropdownTrigger>
         <Button variant="flat" color="secondary">
           <PlusCircle className="mr-2 h-4 w-4" />

@@ -49,6 +49,7 @@ const ProductForm = ({
       unregister("author");
       unregister("pages");
       unregister("publisher");
+      unregister("status");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShowDetail]);
@@ -90,7 +91,7 @@ const ProductForm = ({
                   errors={errors}
                 />
                 {isShowDetail && (
-                  <ProductDetailForm control={control} errors={errors} />
+                  <ProductDetailForm   initData={initData} control={control} errors={errors} />
                 )}
               </ModalBody>
               <ModalFooter>

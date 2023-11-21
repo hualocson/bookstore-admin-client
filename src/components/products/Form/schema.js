@@ -21,5 +21,8 @@ const schema = object({
     .required("pages is required."),
   publisher: string().required("publisher is Required."),
   publicationDate: date().required("publicationDate is Required."),
+  status: number()
+    .positive("Status must be a positive number.")
+    .required("Status is required."),
 }).required();
 export default schema;

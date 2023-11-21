@@ -74,21 +74,41 @@ export const columns = [
             <Chip
               size="md"
               variant={"flat"}
-              className="text-success-300 bg-success-400/30"
+              className="text-semi-grayscale-300 bg-semi-grayscale-300/30"
             >
               {statusName}
             </Chip>
           );
         case ProductStatus.OUT_OF_STOCK:
-          return <span className="text-red-500">{statusName}</span>;
+          return (
+            <Chip size="md" variant={"flat"} color="danger">
+              {statusName}
+            </Chip>
+          );
         case ProductStatus.ON_SALE:
-          return <span className="text-blue-500">{statusName}</span>;
+          return (
+            <Chip
+              size="md"
+              variant={"flat"}
+              className="text-success-300 bg-success-400/30"
+            >
+              {statusName}
+            </Chip>
+          );
         case ProductStatus.NEW_ARRIVAL:
-          return <span className="text-yellow-500">{statusName}</span>;
+          return (
+            <Chip size="md" variant={"flat"} color="warning">
+              {statusName}
+            </Chip>
+          );
         case ProductStatus.BEST_SELLER:
-          return <span className="text-purple-500">{statusName}</span>;
+          return (
+            <Chip size="md" variant={"flat"} color="secondary">
+              {statusName}
+            </Chip>
+          );
         default:
-          return <span>{statusName}</span>;
+          return <Chip>{statusName}</Chip>;
       }
     },
   },

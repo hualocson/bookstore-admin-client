@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 const ProductBasicFrom = ({ isShowDetail, initData, control, errors }) => {
   const { data: categories, isLoading } = useCategories();
-  console.log(control);
   return (
     <div className={cn("grid gap-4 col-span-2", isShowDetail && "col-span-1")}>
       <Controller

@@ -11,6 +11,7 @@ const authApi = {
       return {
         error: undefined,
         user: response.payload,
+        token: response.token,
       };
     } catch (error) {
       return {

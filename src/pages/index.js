@@ -1,31 +1,25 @@
 import LoginForm from "@/components/auth/LoginForm";
-import axios from "axios";
+import { authApi } from "@/apis";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-const Home = ({ response }) => {
-  console.log({ response });
+const Home = () => {
   return <LoginForm />;
 };
 
-export async function getServerSideProps(context) {
-  const cookie = context.req.headers.cookie;
-
-  if (cookie === undefined)
+export async function getServerSideProps(ctx) {
+  try {
+    const { error } = await authApi.getAdminDataSSR(ctx);
+    if (!error) {
+      return {
+        redirect: {
+          destination: "/dashboard",
+          permanent: false,
+        },
+      };
+    }
     return {
       props: {},
-    };
-
-  try {
-    const response = await axios.post(
-      "http://admin-be:8099/api/admin/v1/auth/verify",
-      {},
-      { headers: { cookie } }
-    );
-
-    return {
-      redirect: {
-        destination: "/dashboard",
-        permanent: false,
-      },
     };
   } catch (error) {
     return {

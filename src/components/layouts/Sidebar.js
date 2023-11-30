@@ -1,4 +1,4 @@
-import { cn } from "@/utils/common-functions";
+import { cn, handleErrorResponse } from "@/utils/common-functions";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -6,16 +6,16 @@ import Button from "../ui/Button";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import { authApi } from "@/apis";
 import { useSelector } from "react-redux";
-import { UserIcon } from "@heroicons/react/24/solid";
 import Tooltip from "@/components/ui/Tooltip";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import useAuth from "@/hooks/useAuth";
 dayjs.extend(duration);
 
 const SideBar = ({ navigation }) => {
-  const user = useSelector((state) => state.user);
+  const { user, error, isLoading, isValidating } = useAuth();
   const [expiredOn, setExpiredOn] = useState("");
 
   const [selected, setSelected] = useState();
@@ -30,7 +30,7 @@ const SideBar = ({ navigation }) => {
     const { error } = await authApi.logout();
 
     if (error === undefined) {
-      toast.error("Logout success");
+      toast.success("Logout success");
       router.push("/");
     }
   };
@@ -38,16 +38,16 @@ const SideBar = ({ navigation }) => {
   useEffect(() => {
     if (user === undefined) return;
     const displayRemainTime = () => {
-      const expireAt = dayjs(new Date(user.expire * 1000));
+      const expireAt = dayjs(new Date(user.exp * 1000));
       const remain = expireAt.diff(dayjs(), "second");
       const remainTime = dayjs.duration(remain, "second").format("HH:mm:ss");
       setExpiredOn("Session expired on " + remainTime);
 
       if (remain === 300) toast.warning("Session will expire in 5 minutes");
 
-      if (remain <= 0) {
+      if (remain < 0) {
         toast.error("Session expired");
-        router.push("/");
+        router.replace("/");
       }
     };
 
@@ -58,14 +58,22 @@ const SideBar = ({ navigation }) => {
     return () => clearInterval(interval);
   }, [user, router]);
 
+  useEffect(() => {
+    if (error) {
+      const { message } = handleErrorResponse(error);
+      toast.error(message);
+      router.replace("/");
+    }
+  }, [error, router]);
+
   return (
     <>
       <div className="fixed inset-y-0 z-50 flex w-44 flex-col my-2 ml-2 rounded-md overflow-hidden shadow-md">
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-semi-grayscale-900 px-6 pb-4">
-          <div className="flex h-16 shrink-0 items-center">
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-semi-grayscale-900/60 px-6 pb-4">
+          <div className="flex h-16 items-center justify-center">
             <Tooltip
               trigger={
-                <div className="group -mx-2 flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-grayscale-200 hover:text-grayscale-100 hover:bg-semi-grayscale-800">
+                <div className="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-grayscale-200 hover:text-grayscale-100 hover:bg-semi-grayscale-800">
                   <Image
                     src={"/books-logo.svg"}
                     alt="Logo"
@@ -81,7 +89,7 @@ const SideBar = ({ navigation }) => {
               content={
                 <div className="flex flex-col items-center justify-center gap-y-2">
                   <span className="text-grayscale-200 font-bold z-10">
-                    {`Rank: ${user?.rank ?? "Not user"}`}
+                    {`Rank: ${user?.adminRank ?? "Not user"}`}
                   </span>
                   <span>{expiredOn}</span>
                 </div>
@@ -99,7 +107,7 @@ const SideBar = ({ navigation }) => {
                     <li key={item.name} className="relative">
                       <span
                         className={cn(
-                          "absolute top-1/2 -translate-y-1/2 left-0 -translate-x-full rounded-lg h-3/5 w-1 bg-primary-300 transition-all duration-300",
+                          "absolute top-1/2 -translate-y-1/2 left-0 rounded-lg h-3/5 w-1 bg-primary-300 transition-all duration-300",
                           item.id === selected ? "opacity-100" : "opacity-0"
                         )}
                       ></span>
@@ -107,7 +115,7 @@ const SideBar = ({ navigation }) => {
                         href={item.href}
                         className={cn(
                           item.id === selected
-                            ? "text-primary-300"
+                            ? "text-primary-300 translate-x-2"
                             : "text-grayscale-200 hover:text-grayscale-100 hover:bg-semi-grayscale-800",
                           "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-300"
                         )}

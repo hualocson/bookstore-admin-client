@@ -1,8 +1,8 @@
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
-import Tooltip from "../ui/Tooltip";
 import Image from "next/image";
-import Button from "../ui/Button";
 import { toast } from "react-toastify";
+import Button from "../ui/Button";
+import Tooltip from "../ui/Tooltip";
 
 const Gallery = ({ imageList = [] }) => {
   const copyUrl = async (url) => {
@@ -18,7 +18,7 @@ const Gallery = ({ imageList = [] }) => {
       <p className="bg-primary-500/10 ring-1 ring-primary-500/20 p-2 rounded-md text-primary-400">
         All assets
       </p>
-      <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-4">
+      <div className="flex flex-wrap gap-4">
         {imageList.length === 0 && (
           <p className="col-span-2 md:col-span-4">No assets found</p>
         )}
@@ -28,8 +28,8 @@ const Gallery = ({ imageList = [] }) => {
               <Image
                 src={image.secureUrl}
                 alt={image.cloudinaryPublicId}
-                width={500}
-                height={500}
+                width={160}
+                height={160}
                 priority
                 className="h-auto max-w-full rounded-lg group-hover:shadow-lg group-hover:translate-x-1 group-hover:translate-y-1 transition-all duration-300"
               />

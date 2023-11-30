@@ -3,6 +3,7 @@ import store from "@/store";
 import "@/styles/globals.css";
 import Head from "next/head";
 import { Provider } from "react-redux";
+import { NextUIProvider } from "@nextui-org/react";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,35 +12,15 @@ function MyApp({ Component, pageProps }) {
         <title>{"Admin Bookstore"}</title>
       </Head>
       <Provider store={store}>
-        <Component {...pageProps} />
-        <CustomToastContainer />
+        <NextUIProvider>
+          <div className="dark">
+            <Component {...pageProps} />
+            <CustomToastContainer />
+          </div>
+        </NextUIProvider>
       </Provider>
     </>
   );
 }
-
-// MyApp.getInitialProps = async ({ ctx }) => {
-//   if (ctx.res === undefined) {
-//     return {
-//       pageProps: {
-//         user: undefined,
-//       },
-//     };
-//   }
-
-//   const userStr = ctx.res.getHeader("user");
-//   let user = undefined;
-//   if (userStr) {
-//     user = JSON.parse(userStr);
-//   }
-
-//   // console.log("[APP LOG]", router.pathname, user)
-
-//   return {
-//     pageProps: {
-//       user: user,
-//     },
-//   };
-// };
 
 export default MyApp;

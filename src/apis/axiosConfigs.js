@@ -3,6 +3,7 @@ import env from "@/utils/vars";
 
 const axiosInstance = axios.create({
   baseURL: env.BASE_URL,
+  withCredentials: true,
 });
 // Response interceptor to handle successful responses
 axiosInstance.interceptors.response.use(

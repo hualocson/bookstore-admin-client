@@ -31,7 +31,6 @@ const LoginForm = () => {
         setLoading(false);
       }, 500);
 
-      // set token to cookie
       document.cookie = `admin_auth=${token}`;
 
       router.push("/dashboard");

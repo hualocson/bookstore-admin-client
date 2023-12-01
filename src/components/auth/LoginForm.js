@@ -17,7 +17,7 @@ const LoginForm = () => {
       return toast.error("Please fill all fields");
 
     setLoading(true);
-    const { error, user } = await authApi.login(formData);
+    const { error, token } = await authApi.login(formData);
 
     if (error !== undefined) {
       const { message } = handleErrorResponse(error);
@@ -30,6 +30,9 @@ const LoginForm = () => {
       setTimeout(() => {
         setLoading(false);
       }, 500);
+
+      // set token to cookie
+      document.cookie = `admin_auth=${token}`;
 
       router.push("/dashboard");
       toast.success("Login success");

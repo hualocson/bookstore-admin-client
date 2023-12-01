@@ -1,4 +1,5 @@
 import axiosInstance from "../axiosConfigs";
+import env from "@/utils/vars";
 
 const authApi = {
   login: async ({ username, password }) => {
@@ -11,6 +12,7 @@ const authApi = {
       return {
         error: undefined,
         user: response.payload,
+        token: response.token,
       };
     } catch (error) {
       return {
@@ -34,7 +36,7 @@ const authApi = {
 
   getAdminDataSSR: async (ctx) => {
     try {
-      const response = await fetch("http://admin-be:8099/api/admin/v1/auth", {
+      const response = await fetch(`${env.SSR_BASE_URL}/auth`, {
         method: "GET",
         credentials: "include",
         headers: {

@@ -45,7 +45,7 @@ export const columns = [
           height={120}
           className="object-contain h-auto rounded shadow-lg"
           priority
-          alt={`category-image-${row.getValue("id")}`}
+          alt={`category-image-${row.original.id}`}
         />
       );
     },
@@ -133,12 +133,6 @@ export const columns = [
           label: "Restore",
           icon: <RestoreIcon className={iconClass} strokeWidth={1.5} />,
           status: row.original.deletedAt ? "default" : "hidden",
-        },
-        {
-          key: "more",
-          label: "View detail",
-          icon: <EyeIcon className={iconClass} strokeWidth={1.5} />,
-          status: "default",
         },
         {
           key: "delete",

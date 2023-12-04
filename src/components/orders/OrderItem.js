@@ -7,7 +7,7 @@ const OrderItem = ({ image, name, quantity, author, price }) => {
     <div className="flex flex-col gap-4">
       <div className="flex gap-10">
         <Image
-          src={image || book}
+          src={image}
           alt="Book Cover"
           width={120}
           height={160}

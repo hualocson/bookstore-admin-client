@@ -17,7 +17,7 @@ export const columns = [
       return <span>{getLastCharacters(hashText(String(id)))}</span>;
     },
     filterFn: (row, id, value) => {
-      const hashedId = hashText(String(row.getValue(id)));
+      const hashedId = hashText(String(row.original.id));
       return hashedId.includes(value);
     },
   },

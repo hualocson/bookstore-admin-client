@@ -17,7 +17,7 @@ export const columns = [
           height={120}
           className="object-contain h-auto rounded shadow-lg"
           priority
-          alt={`category-image-${row.getValue("id")}`}
+          alt={`category-image-${row.original.id}`}
         />
       );
     },

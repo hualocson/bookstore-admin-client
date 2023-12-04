@@ -43,14 +43,6 @@ const CategoryForm = ({ dataRef, categories }) => {
         value={formData.description}
         onChange={(e) => onInputChange("description", e.target.value)}
       />
-
-      <InputWithLabel
-        label="Image"
-        id="category-image"
-        placeholder="Enter image"
-        value={formData.image}
-        onChange={(e) => onInputChange("image", e.target.value)}
-      />
     </div>
   );
 };

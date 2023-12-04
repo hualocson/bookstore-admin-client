@@ -33,14 +33,12 @@ const CategoriesPage = () => {
       bodyData = {
         name: formData.current.name,
         description: formData.current.description,
-        image: formData.current.image,
       };
     } else {
       bodyData = {
         name: formData.current.name,
         parentId: formData.current.parentId,
         description: formData.current.description,
-        image: formData.current.image,
       };
     }
 

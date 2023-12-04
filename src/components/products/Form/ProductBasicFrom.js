@@ -3,12 +3,11 @@ import { cn } from "@/utils/common-functions";
 import { Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Controller } from "react-hook-form";
 import ProductInput from "./ProductInput";
-import { useEffect, useState } from "react";
 
-const ProductBasicFrom = ({ isShowDetail, initData, control, errors }) => {
+const ProductBasicFrom = ({ initData, control, errors, onImageChange }) => {
   const { data: categories, isLoading } = useCategories();
   return (
-    <div className={cn("grid gap-4 col-span-2", isShowDetail && "col-span-1")}>
+    <div className={cn("grid gap-4 col-span-1")}>
       <Controller
         control={control}
         name="name"
@@ -22,19 +21,22 @@ const ProductBasicFrom = ({ isShowDetail, initData, control, errors }) => {
           />
         )}
       />
-      <Controller
-        control={control}
-        name="image"
-        defaultValue={""}
-        render={({ field }) => (
-          <ProductInput
-            label="Image"
-            isInvalid={errors.image}
-            errorMessage={errors.image?.message}
-            field={field}
-          />
-        )}
-      />
+      <div className="flex gap-2 items-center">
+        <Controller
+          control={control}
+          name="image"
+          defaultValue={""}
+          render={({ field }) => (
+            <ProductInput
+              label="Image"
+              isInvalid={errors.image}
+              errorMessage={errors.image?.message}
+              field={field}
+              onValueChange={onImageChange}
+            />
+          )}
+        />
+      </div>
       <Controller
         control={control}
         name="categoryId"

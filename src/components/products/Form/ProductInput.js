@@ -1,7 +1,13 @@
 import { Input } from "@nextui-org/react";
 import React from "react";
 
-const ProductInput = ({ label, isInvalid, errorMessage, field }) => {
+const ProductInput = ({
+  label,
+  isInvalid,
+  errorMessage,
+  field,
+  onValueChange,
+}) => {
   return (
     <Input
       label={label}
@@ -18,6 +24,7 @@ const ProductInput = ({ label, isInvalid, errorMessage, field }) => {
       errorMessage={errorMessage}
       autoComplete="off"
       isRequired
+      onValueChange={onValueChange}
       {...field}
     />
   );

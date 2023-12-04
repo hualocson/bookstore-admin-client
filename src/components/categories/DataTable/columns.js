@@ -30,36 +30,19 @@ export const columns = [
     accessorKey: "parentId",
     header: "Parent",
     cell: ({ row }) => {
-      const value = row.getValue("parentId");
-      return value ? value : <span className="text-danger-500">N/A</span>;
+      const value = row.original.parentId;
+      return value ? value : <span className="text-danger-500">_</span>;
     },
   },
   {
     accessorKey: "description",
     header: "Description",
     cell: ({ row }) => {
-      const value = row.getValue("description");
+      const value = row.original.description;
       return value ? (
         <span className="text-primary-300">{`"${value}"`}</span>
       ) : (
         <span className="text-danger-500">N/A</span>
-      );
-    },
-  },
-  {
-    accessorKey: "image",
-    header: "Image",
-    cell: ({ row }) => {
-      const imageUrl = row.getValue("image");
-      return (
-        <span>
-          <Image
-            src={imageUrl}
-            width={50}
-            height={50}
-            alt={`category-image-${row.getValue("id")}`}
-          />
-        </span>
       );
     },
   },
@@ -77,7 +60,6 @@ export const columns = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Inactive</DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
                 const category = row.original;

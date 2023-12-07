@@ -63,11 +63,11 @@ export const columns = [
     header: "Category",
   },
   {
-    accessorKey: "statusName",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row, getValue }) => {
-      const statusName = getValue();
-      const { status } = row.original;
+      const status = getValue();
+      const { statusName } = row.original;
       switch (status) {
         case ProductStatus.IN_STOCK:
           return (
@@ -110,6 +110,10 @@ export const columns = [
         default:
           return <Chip>{statusName}</Chip>;
       }
+    },
+
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
     },
   },
   {

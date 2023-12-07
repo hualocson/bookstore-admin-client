@@ -11,7 +11,7 @@ import {
 } from "@tanstack/react-table";
 import DataTableToolbar from "./DataTableToolbar";
 
-const OrdersDataTable = ({ data, onOpenModal }) => {
+const OrdersDataTable = ({ data, onOpenModal, onCancel }) => {
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
     data,
@@ -27,6 +27,7 @@ const OrdersDataTable = ({ data, onOpenModal }) => {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     meta: {
       openModal: onOpenModal,
+      onCancel,
     },
   });
   return (

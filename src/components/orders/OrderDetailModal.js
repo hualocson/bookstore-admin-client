@@ -46,7 +46,7 @@ const OrderDetailModal = ({ orderId, onCloseModal, ...order }) => {
     await delay(1000);
 
     if (order.status === OrderStatus.CANCELLED) {
-      return;
+      return "";
     }
 
     const newStatus =

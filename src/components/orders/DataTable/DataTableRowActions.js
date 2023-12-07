@@ -1,3 +1,4 @@
+import { OrderStatus } from "@/utils/constants";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import {
   Button,
@@ -14,18 +15,24 @@ const DataTableRowActions = ({ row, table }) => {
   const items = [
     {
       key: "more",
+      color: "default",
       label: "View detail",
+      status: "default",
       icon: <EyeIcon className={iconClass} strokeWidth={1.5} />,
     },
     {
-      key: "delete",
-      label: "Delete",
+      key: "cancel",
+      color: "danger",
+      label: "Cancel",
+      status:
+        row.original.status === OrderStatus.DELIVERED ? "hidden" : "default",
       icon: <DeleteIcon className={iconClass} strokeWidth={1.5} />,
     },
   ];
   const handleOnPress = (key) => {
     switch (key) {
-      case "delete":
+      case "cancel":
+        table.options.meta.onCancel(row.original);
         break;
       case "more":
         table.options.meta.openModal(row.original);
@@ -48,7 +55,12 @@ const DataTableRowActions = ({ row, table }) => {
         onAction={(key) => handleOnPress(key)}
       >
         {(item) => (
-          <DropdownItem key={item.key} startContent={item.icon}>
+          <DropdownItem
+            key={item.key}
+            color={item.color}
+            startContent={item.icon}
+            className={item.status === "hidden" && "hidden"}
+          >
             {item.label}
           </DropdownItem>
         )}
